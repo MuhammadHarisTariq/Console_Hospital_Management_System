@@ -1,179 +1,130 @@
-import os
+# Function to add a new patient record
+def writeP():
+    id = input("Enter Patient ID: ")
+    name = input("Enter Patient Name: ")
+    age = input("Enter Patient Age: ")
+    mobile = input("Enter Patient Mobile: ")
+    department = input("Enter Department: ")
+    salary = input("Enter Salary: ")
+
+    with open('PatientPy.txt', 'a') as file:
+        file.write(f"{id}\t\t{name}\t\t{age}\t\t{mobile}\t\t{department}\t\t{salary}\n")
+
+    print('Patient record added successfully.')
+
+# Function to read and display all patient records
+def readP():
+    with open('PatientPy.txt', 'r') as file:
+        data = file.read()
+    print(data)
+
+# Function to search for a patient by ID
+def searchByIdP():
+    id = input("Enter Patient ID: ")
+    with open('PatientPy.txt', 'r') as file:
+        found = False
+        for line in file:
+            fields = line.split('\t\t')
+            if fields[0] == id:
+                print(f"ID\t\tName\t\tAge\t\tMobile\t\tDepartment\t\tSalary\n{'-' * 95}\n{line}")
+                found = True
+                break
+        if not found:
+            print("Patient not found!")
 
 # Function to add a new doctor record
 def writeD():
+    id = input("Enter Doctor ID: ")
+    name = input("Enter Doctor Name: ")
+    specialization = input("Enter Specialization: ")
+
     with open('DoctorPy.txt', 'a') as file:
-        c = 'y'
-        while c.lower() == 'y':
-            # Get doctor details from the user
-            id = input("Enter Doctor ID: ")
-            name = input("Enter Doctor Name: ")
-            age = input("Enter Doctor Age: ")
-            mobile = input("Enter Doctor Mobile number: ")
-            department = input("Enter Doctor work department: ")
-            salary = input("Enter Doctor salary: ")
-            # Write the details to the file
-            file.write(f"{id}\t\t{name}\t\t{age}\t\t{mobile}\t\t{department}\t\t{salary}\n")
-            c = input('Do you want to enter more records (y/n)? ')
-    print('File saved successfully.')
+        file.write(f"{id}\t\t{name}\t\t{specialization}\n")
+
+    print('Doctor record added successfully.')
 
 # Function to read and display all doctor records
 def readD():
     with open('DoctorPy.txt', 'r') as file:
-        print('ID\t\tName\t\tAge\t\tMobile\t\tDepartment\t\tSalary')
-        print('-' * 95)
-        for line in file:
-            print(line, end='')
+        data = file.read()
+    print(data)
 
 # Function to search for a doctor by ID
 def searchByIdD():
-    c = 'y'
-    while c.lower() == 'y':
-        id = input('Enter Doctor ID to search: ')
-        with open('DoctorPy.txt', 'r') as file:
-            found = False
-            for line in file:
-                fields = line.split('\t\t')
-                if fields[0] == id:
-                    found = True
-                    print('ID\t\tName\t\tAge\t\tMobile\t\tDepartment\t\tSalary')
-                    print('-' * 95)
-                    print(line)
-                    break
-            if not found:
-                print('Doctor not found!')
-        c = input('Do you want to search more Doctors (y/n)? ')
-
-# Function to search for a doctor by Name
-def searchByNameD():
-    c = 'y'
-    while c.lower() == 'y':
-        name = input('Enter Doctor Name to search: ')
-        with open('DoctorPy.txt', 'r') as file:
-            found = False
-            for line in file:
-                fields = line.split('\t\t')
-                if fields[1] == name:
-                    found = True
-                    print('ID\t\tName\t\tAge\t\tMobile\t\tDepartment\t\tSalary')
-                    print('-' * 95)
-                    print(line)
-                    break
-            if not found:
-                print('Doctor not found!')
-        c = input('Do you want to search more Doctors (y/n)? ')
-
-# Function to update a doctor record by ID
-def updateByIdD():
-    c = 'y'
-    while c.lower() == 'y':
-        id = input('Enter Doctor ID to update: ')
-        with open('DoctorPy.txt', 'r') as file:
-            lines = file.readlines()
-
-        with open('DoctorPy.txt', 'w') as file:
-            found = False
-            for line in lines:
-                fields = line.split('\t\t')
-                if fields[0] == id:
-                    found = True
-                    # Get new details from the user
-                    id = input("Enter new Doctor ID: ")
-                    name = input("Enter new Doctor Name: ")
-                    age = input("Enter new Doctor Age: ")
-                    mobile = input("Enter new Doctor Mobile number: ")
-                    department = input("Enter new Doctor work department: ")
-                    salary = input("Enter new Doctor salary: ")
-                    # Write the new details to the file
-                    file.write(f"{id}\t\t{name}\t\t{age}\t\t{mobile}\t\t{department}\t\t{salary}\n")
-                else:
-                    file.write(line)
-            if not found:
-                print('Doctor not found!')
-            else:
-                print('Doctor updated successfully.')
-                readD()
-        c = input('Do you want to update more Doctor records (y/n)? ')
-
-# Function to delete a doctor record by ID
-def deleteD():
-    id = input('Enter Doctor ID to delete: ')
+    id = input("Enter Doctor ID: ")
     with open('DoctorPy.txt', 'r') as file:
-        lines = file.readlines()
-
-    with open('DoctorPy.txt', 'w') as file:
         found = False
-        for line in lines:
+        for line in file:
             fields = line.split('\t\t')
             if fields[0] == id:
+                print(f"ID\t\tName\t\tSpecialization\n{'-' * 50}\n{line}")
                 found = True
-            else:
-                file.write(line)
+                break
         if not found:
-            print('Doctor not found!')
-        else:
-            print('Doctor deleted successfully.')
-            readD()
-
-# Function to display the Doctor Management menu
-def homeD():
-    while True:
-        print('-------------------------')
-        print('1: Add New Record')
-        print('2: Read All Records')
-        print('3: Search For Record')
-        print('4: Update Record')
-        print('5: Delete Record')
-        print('6: Go to Main menu')
-        print('7: Exit')
-        print('-------------------------\n')
-        operation = input('Choose Operation: ')
-        if operation == '1':
-            writeD()
-        elif operation == '2':
-            readD()
-        elif operation == '3':
-            print('1- Search By Id')
-            print('2- Search By Name')
-            option = input('Choose Option: ')
-            if option == '1':
-                searchByIdD()
-            elif option == '2':
-                searchByNameD()
-        elif operation == '4':
-            updateByIdD()
-        elif operation == '5':
-            deleteD()
-        elif operation == '6':
-            main()
-        elif operation == '7':
-            print('Thank You!')
-            break
-        else:
-            print("Invalid choice!")
-        if input('Do you want to perform more operations (y/n)? ').lower() != 'y':
-            break
+            print("Doctor not found!")
 
 # Function to display the main menu
 def main():
     while True:
-        print('+----------------------------+')
-        print('+ HOSPITAL MANAGEMENT SYSTEM +')
-        print('+----------------------------+')
-        print('1: Doctor Department')
-        print('2: Exit')
-        print('---------------------------\n')
-        operation = input('Choose Operation: ')
-        if operation == '1':
-            homeD()
-        elif operation == '2':
-            print('Thank You!')
+        print("\n--- Hospital Management System Menu ---")
+        print("1. Patient Department")
+        print("2. Doctor Department")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            patient_department()
+        elif choice == "2":
+            doctor_department()
+        elif choice == "3":
+            print("Exiting...")
             break
         else:
-            print("Invalid choice!")
-        if input('Do you want to go back to the main menu (y/n)? ').lower() != 'y':
+            print("Invalid choice. Please enter a valid option.")
+
+# Function to handle patient department operations
+def patient_department():
+    while True:
+        print("\n--- Patient Department Menu ---")
+        print("1. Add Patient Record")
+        print("2. Read All Patient Records")
+        print("3. Search Patient by ID")
+        print("4. Back to Main Menu")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            writeP()
+        elif choice == "2":
+            readP()
+        elif choice == "3":
+            searchByIdP()
+        elif choice == "4":
             break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+# Function to handle doctor department operations
+def doctor_department():
+    while True:
+        print("\n--- Doctor Department Menu ---")
+        print("1. Add Doctor Record")
+        print("2. Read All Doctor Records")
+        print("3. Search Doctor by ID")
+        print("4. Back to Main Menu")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            writeD()
+        elif choice == "2":
+            readD()
+        elif choice == "3":
+            searchByIdD()
+        elif choice == "4":
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
 
 # Run the main function
 main()
+
 
