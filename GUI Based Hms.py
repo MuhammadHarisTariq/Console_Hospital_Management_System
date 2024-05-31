@@ -83,6 +83,37 @@ def searchByIdP():
     result_var = tk.StringVar()
     tk.Label(search_window, textvariable=result_var).grid(row=2, columnspan=2, padx=10, pady=10)
 
+# Function to delete a patient record by ID
+def deleteP():
+    def delete():
+        id = id_entry.get()
+        with open('PatientPy.txt', 'r') as file:
+            lines = file.readlines()
+
+        with open('PatientPy.txt', 'w') as file:
+            found = False
+            for line in lines:
+                fields = line.split('\t\t')
+                if fields[0] == id:
+                    found = True
+                else:
+                    file.write(line)
+
+            if found:
+                messagebox.showinfo('Info', 'Patient record deleted successfully.')
+                delete_window.destroy()
+            else:
+                messagebox.showerror('Error', 'Patient not found!')
+
+    delete_window = tk.Toplevel(root)
+    delete_window.title("Delete Patient Record")
+
+    tk.Label(delete_window, text="Enter Patient ID to delete:").grid(row=0, column=0, padx=10, pady=5)
+    id_entry = tk.Entry(delete_window)
+    id_entry.grid(row=0, column=1, padx=10, pady=5)
+
+    tk.Button(delete_window, text="Delete", command=delete).grid(row=1, columnspan=2, pady=10)
+
 # Function to display the Patient Management menu
 def homeP():
     menu_window = tk.Toplevel(root)
@@ -91,6 +122,7 @@ def homeP():
     tk.Button(menu_window, text="Add Patient Record", command=writeP, width=20).pack(padx=10, pady=10)
     tk.Button(menu_window, text="Read All Patient Records", command=readP, width=20).pack(padx=10, pady=10)
     tk.Button(menu_window, text="Search Patient by ID", command=searchByIdP, width=20).pack(padx=10, pady=10)
+    tk.Button(menu_window, text="Delete Patient by ID", command=deleteP, width=20).pack(padx=10, pady=10)
 
 # Function to add a new doctor record
 def writeD():
@@ -109,7 +141,7 @@ def writeD():
     add_window.title("Add New Doctor Record")
 
     tk.Label(add_window, text="Doctor ID:").grid(row=0, column=0, padx=10, pady=5)
-    tk.Label(add_window, text="Doctor Name:").grid(row=1, column=0, padx=10, pady=5)
+    tk.Label(add_window, text="Doctor Name:").grid(row=1, column=0, padx=10,    pady=5)
     tk.Label(add_window, text="Specialization:").grid(row=2, column=0, padx=10, pady=5)
 
     id_entry = tk.Entry(add_window)
@@ -162,6 +194,37 @@ def searchByIdD():
     result_var = tk.StringVar()
     tk.Label(search_window, textvariable=result_var).grid(row=2, columnspan=2, padx=10, pady=10)
 
+# Function to delete a doctor record by ID
+def deleteD():
+    def delete():
+        id = id_entry.get()
+        with open('DoctorPy.txt', 'r') as file:
+            lines = file.readlines()
+
+        with open('DoctorPy.txt', 'w') as file:
+            found = False
+            for line in lines:
+                fields = line.split('\t\t')
+                if fields[0] == id:
+                    found = True
+                else:
+                    file.write(line)
+
+            if found:
+                messagebox.showinfo('Info', 'Doctor record deleted successfully.')
+                delete_window.destroy()
+            else:
+                messagebox.showerror('Error', 'Doctor not found!')
+
+    delete_window = tk.Toplevel(root)
+    delete_window.title("Delete Doctor Record")
+
+    tk.Label(delete_window, text="Enter Doctor ID to delete:").grid(row=0, column=0, padx=10, pady=5)
+    id_entry = tk.Entry(delete_window)
+    id_entry.grid(row=0, column=1, padx=10, pady=5)
+
+    tk.Button(delete_window, text="Delete", command=delete).grid(row=1, columnspan=2, pady=10)
+
 # Function to display the Doctor Management menu
 def homeD():
     menu_window = tk.Toplevel(root)
@@ -170,6 +233,7 @@ def homeD():
     tk.Button(menu_window, text="Add Doctor Record", command=writeD, width=20).pack(padx=10, pady=10)
     tk.Button(menu_window, text="Read All Doctor Records", command=readD, width=20).pack(padx=10, pady=10)
     tk.Button(menu_window, text="Search Doctor by ID", command=searchByIdD, width=20).pack(padx=10, pady=10)
+    tk.Button(menu_window, text="Delete Doctor by ID", command=deleteD, width=20).pack(padx=10, pady=10)
 
 # Function to display the main menu
 def main():
@@ -185,5 +249,8 @@ def main():
 
 # Run the main function
 main()
+
+
+
 
 
