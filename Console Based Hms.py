@@ -1,6 +1,4 @@
 import os
-
-# Function to add a new patient record
 def writeP():
     id = input("Enter Patient ID: ")
     name = input("Enter Patient Name: ")
@@ -13,13 +11,9 @@ def writeP():
         file.write(f"{id}\t\t{name}\t\t{age}\t\t{mobile}\t\t{department}\t\t{salary}\n")
 
     print('Patient record added successfully.')
-
-# Function to read and display all patient records
 def readP():
     with open('PatientPy.txt', 'r') as file:
         print(file.read())
-
-# Function to search for a patient by ID
 def searchByIdP():
     id = input("Enter Patient ID: ")
     with open('PatientPy.txt', 'r') as file:
@@ -32,8 +26,6 @@ def searchByIdP():
                 break
         if not found:
             print("Patient not found!")
-
-# Function to delete a patient record by ID
 def deleteP():
     id = input("Enter Patient ID to delete: ")
     with open('PatientPy.txt', 'r') as file:
@@ -52,8 +44,6 @@ def deleteP():
             print('Patient record deleted successfully.')
         else:
             print('Patient not found!')
-
-# Function to display the Patient Management menu
 def homeP():
     while True:
         print("\nPatient Management Menu:")
@@ -77,8 +67,6 @@ def homeP():
             break
         else:
             print("Invalid choice. Please try again.")
-
-# Function to add a new doctor record
 def writeD():
     id = input("Enter Doctor ID: ")
     name = input("Enter Doctor Name: ")
@@ -88,13 +76,9 @@ def writeD():
         file.write(f"{id}\t\t{name}\t\t{specialization}\n")
 
     print('Doctor record added successfully.')
-
-# Function to read and display all doctor records
 def readD():
     with open('DoctorPy.txt', 'r') as file:
         print(file.read())
-
-# Function to search for a doctor by ID
 def searchByIdD():
     id = input("Enter Doctor ID: ")
     with open('DoctorPy.txt', 'r') as file:
@@ -107,8 +91,6 @@ def searchByIdD():
                 break
         if not found:
             print("Doctor not found!")
-
-# Function to delete a doctor record by ID
 def deleteD():
     id = input("Enter Doctor ID to delete: ")
     with open('DoctorPy.txt', 'r') as file:
@@ -127,8 +109,6 @@ def deleteD():
             print('Doctor record deleted successfully.')
         else:
             print('Doctor not found!')
-
-# Function to display the Doctor Management menu
 def homeD():
     while True:
         print("\nDoctor Management Menu:")
@@ -152,8 +132,6 @@ def homeD():
             break
         else:
             print("Invalid choice. Please try again.")
-
-# Function to display the main menu
 def main():
     while True:
         print("\nMain Menu:")
@@ -171,6 +149,4 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")
-
-# Run the main function
 main()
