@@ -4,11 +4,9 @@ def writeP():
     name = input("Enter Patient Name: ")
     age = input("Enter Patient Age: ")
     mobile = input("Enter Patient Mobile: ")
-    department = input("Enter Department: ")
-    salary = input("Enter Salary: ")
 
     with open('PatientPy.txt', 'a') as file:
-        file.write(f"{id}\t\t{name}\t\t{age}\t\t{mobile}\t\t{department}\t\t{salary}\n")
+        file.write(f"{id}\t\t{name}\t\t{age}\t\t{mobile}\n")
 
     print('Patient record added successfully.')
 def readP():
