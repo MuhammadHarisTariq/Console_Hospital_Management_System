@@ -21,7 +21,7 @@ The Hospital Management System is a Python-based application designed to manage 
 
 Clone the repository:
 ```bash
-git clone https://https://github.com/MuhammadHarisTariq/Hospital-Management-System
+git clone https://github.com/MuhammadHarisTariq/Hospital-Management-System.git
 ```
 Navigate to the project directory::
 ```bash
